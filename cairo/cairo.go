@@ -294,6 +294,13 @@ func (v *Context) native() *C.cairo_t {
 	return v.context
 }
 
+func (v *Context) GetCContext() *C.cairo_t {
+	if v == nil {
+		return nil
+	}
+	return v.context
+}
+
 // Native returns a pointer to the underlying cairo_t.
 func (v *Context) Native() uintptr {
 	return uintptr(unsafe.Pointer(v.native()))

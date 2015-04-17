@@ -15,25 +15,30 @@
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
+package pango
 
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
+// #cgo pkg-config: pango
+// #include <pango/pango.h>
+// #include "pango.go.h"
+// #include <stdlib.h>
+import "C"
+import (
+	//	"github.com/terrak/gotk3/glib"
+	//	"github.com/terrak/gotk3/cairo"
+	"unsafe"
+)
 
-#include "pango-attributes.go.h"
-#include "pango-layout.go.h"
-
-#include "pangocairo.go.h"
-
-
-
-static PangoRectangle *
-createPangoRectangle(int x, int y, int width, int height)
-{
-	PangoRectangle *r = (PangoRectangle *)malloc(sizeof(PangoRectangle));
-	r->x = x;
-	r->y = y;
-	r->width = width;
-	r->height = height;
-	return r;
+// GlyphItem is a representation of PangoGlyphItem.
+type GlyphItem struct {
+	pangoGlyphItem *C.PangoGlyphItem
 }
+
+// Native returns a pointer to the underlying PangoGlyphItem.
+func (v *GlyphItem) Native() uintptr {
+	return uintptr(unsafe.Pointer(v.native()))
+}
+
+func (v *GlyphItem) native() *C.PangoGlyphItem {
+	return (*C.PangoGlyphItem)(unsafe.Pointer(v.pangoGlyphItem))
+}
+

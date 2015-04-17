@@ -104,7 +104,6 @@ func (v *AttrList) native() *C.PangoAttrList {
 	return (*C.PangoAttrList)(unsafe.Pointer(v.pangoAttrList))
 }
 
-
 // AttrType is a representation of Pango's PangoAttrType.
 type AttrType int
 
